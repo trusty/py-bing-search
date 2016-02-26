@@ -1,7 +1,9 @@
 import urllib2
-import requests
+import httputil
 import pdb
 import time
+
+requests = httputil.get_requests_session()
 
 class PyBingException(Exception):
     pass
