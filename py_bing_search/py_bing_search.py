@@ -17,8 +17,8 @@ class PyBingSearch(object):
         self.api_key = api_key
         self.safe = safe
 
-    def search(self, query, limit=50, offset=0, format='json'):
-        return self._search(query, limit, offset, format)
+    def search(self, query, limit=50, offset=0, format='json', timeout=5):
+        return self._search(query, limit, offset, format, timeout=timeout)
 
     def search_all(self, query, limit=50, format='json'):
         results = self._search(query, limit, 0, format)
@@ -28,12 +28,12 @@ class PyBingSearch(object):
             results += more_results
         return results
 
-    def _search(self, query, limit, offset, format):
+    def _search(self, query, limit, offset, format, timeout=5):
         '''
         Returns a list of result objects, with the url for the next page bing search url.
         '''
         url = self.QUERY_URL.format(urllib2.quote("'{}'".format(query)), limit, offset, format)
-        r = requests.get(url, auth=("", self.api_key))
+        r = requests.get(url, auth=("", self.api_key), timeout=timeout)
         try:
             json_results = r.json()
         except ValueError as vE:
