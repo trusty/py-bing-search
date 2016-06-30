@@ -82,7 +82,7 @@ class Result(object):
 
     def __init__(self, result, source='Web'):
         self.url = result.get('Url')
-        if source == 'Image':
+        if source.lower() == 'image':
             self.url = result.get('MediaUrl')
         self.title = result['Title']
         self.description = result.get('Description')
