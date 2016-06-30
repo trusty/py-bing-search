@@ -38,7 +38,7 @@ class PyBingSearch(object):
         Returns a list of result objects, with the url for the next page bing search url.
         '''
         url = self.QUERY_URL.format(urllib2.quote("'{}'".format(query)), limit, offset, format)
-        if source == "Image":
+        if source.lower() == "image":
             url = self.IMAGE_URL.format(urllib2.quote("'{}'".format(query)), limit, offset, format)
         r = requests.get(url, auth=("", self.api_key), timeout=timeout)
         try:
